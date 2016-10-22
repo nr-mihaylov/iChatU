@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel='stylesheet' type="text/css" href='/stylesheets/reset.css' />
+		<link rel='stylesheet' type="text/css" href='/stylesheets/style.css' />
+		<link rel="icon" href="/images/favicon.ico?" type="image/x-icon">
+	</head>
+	<body>
+
+		<div class="errorMessage">
+			<p class="errorMessage__text">> This is not the page you are looking for</p>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="/javascripts/lib/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="/javascripts/blinkingCursor.js"></script>
+	<script type="text/javascript" src="/javascripts/error.js"></script>
+</html>

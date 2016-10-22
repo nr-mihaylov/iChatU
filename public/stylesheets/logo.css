@@ -1,0 +1,15 @@
+.logo {
+  max-width: 300px;
+  position: relative;
+  margin: 20px auto; }
+
+.logo__img {
+  width: 40%;
+  height: auto; }
+
+.logo__text {
+  position: absolute;
+  left: 25%;
+  top: 53%;
+  transform: translateY(-50%);
+  color: #1D1F20; }

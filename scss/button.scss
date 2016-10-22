@@ -1,0 +1,26 @@
+@import 'util';
+
+.btn {
+	border: none;
+	outline: none;
+	padding: 10px 20px;
+
+	color: $indexBackgroundColor;
+	background-color: $indexTextColor;
+
+	@extend %strong-font;
+	font-size: 1.5rem;
+	
+	cursor: pointer;
+}
+
+	.btn--alternate {
+		color: $indexTextColor;
+		background-color: $indexBackgroundColor;
+	}
+
+.image-btn {
+	max-width: 48px;
+	height: auto;
+	cursor: pointer;
+}

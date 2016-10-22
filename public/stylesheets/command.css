@@ -1,0 +1,128 @@
+pre, .sample, .shell__input-line {
+  font: 300 1.25rem "Lucida Console"; }
+
+.shell__arrow {
+  font: 700 1.25rem "Lucida Console"; }
+
+.default {
+  color: #EEEEEE; }
+
+.success {
+  color: #5CFF73; }
+
+.error {
+  color: #FF5750; }
+
+.warning {
+  color: #FF8143; }
+
+.system {
+  color: #42FFCF; }
+
+.shell {
+  width: 100%;
+  height: 100vh;
+  background-color: #1D1F20; }
+
+.shell__sample {
+  display: none; }
+
+.shell__output {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  overflow-wrap: break-word;
+  z-index: 0; }
+
+.shell__output-line {
+  padding-bottom: 10px;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word; }
+
+.wat {
+  width: auto;
+  height: 550px;
+  padding-bottom: 10px; }
+
+.shell__input {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  padding-left: 30px;
+  background-color: #333536;
+  border-top: 1px solid #4c4f50; }
+
+.shell__arrow {
+  position: absolute;
+  left: 0;
+  padding: 7px;
+  font-size: 26px; }
+
+.shell__input-line {
+  width: 100%;
+  line-height: 26px;
+  vertical-align: middle;
+  min-height: 40px;
+  padding: 7px;
+  outline: none;
+  border: none;
+  resize: none;
+  overflow: hidden;
+  background-color: transparent; }
+
+.statusbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  background-color: #111111; }
+
+.statusbar--server {
+  position: fixed;
+  top: 60px; }
+
+.statusbar--user {
+  position: fixed;
+  top: 120px; }
+
+.statusbar--group {
+  position: fixed;
+  top: 180px; }
+
+.statusbar--hidden {
+  display: none; }
+
+.statusbar__item {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%; }
+  .statusbar__item img {
+    width: 40px;
+    height: auto;
+    padding: 5px; }
+
+.statusbar__item--default {
+  background-color: #42FFCF; }
+
+.statusbar__item--on {
+  background-color: #5CFF73; }
+
+.statusbar__item--off {
+  background-color: #FF5750; }
+
+.statusbar__item--left {
+  float: left; }
+
+.statusbar__item--right {
+  float: right; }
+
+.statusbar__info {
+  padding-left: 50px;
+  line-height: 40px;
+  font-size: 1.25rem; }

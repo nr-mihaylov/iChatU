@@ -1,0 +1,88 @@
+@import 'util';
+
+.form__validation {
+	color: $indexErrorColor;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.form__field {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 5px;
+	
+	@extend %default-font;
+	color: $indexTextColor;
+	background-color: transparent;
+	
+	border: none;
+	border-bottom: 2px dotted $indexTextColor;
+	outline: none;
+
+	&::-webkit-input-placeholder { 
+		color: $indexTextColor;
+	}
+	&::-moz-placeholder { 
+		color: $indexTextColor;
+	}
+	&:-ms-input-placeholder { 
+		color: $indexTextColor;
+	}
+	&:-moz-placeholder { 
+		color: $indexTextColor;
+	}
+
+}
+
+
+.form__actionbar {
+	text-align: center;
+	margin-top: 15px;
+}
+
+	.form__submit {
+		margin-left: 10px;
+	}
+
+	.form__cancel {
+		margin-right: 10px;
+	}
+
+
+.form--alternate {
+
+	.form__body {
+		width: calc(100% - 70px);
+		display: inline-block;
+
+	}
+
+		.form__field {
+			padding: 5px;
+		}
+
+		.form__validation {
+			margin-bottom: 0px;
+		}
+
+	.form__actionbar {
+		display: inline-block;
+		vertical-align: bottom;
+		margin-top: 0;
+		margin-left: 10px;
+
+	}
+
+		.form__submit {
+			display: block;
+			margin: 0;
+			margin-top: 10px;
+		}
+
+		.form__cancel {
+			display: block;
+			margin: 0;
+		}
+
+}

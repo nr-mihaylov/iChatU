@@ -1,0 +1,56 @@
+@import 'util';
+
+.fold {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+}
+
+	.fold__section {
+		float: left;
+		width: 100%;
+		height: 50vh;
+		background-color: $indexBackgroundColor;
+
+	}
+
+		.fold__content {
+			width: 100%;
+			max-width: 420px;
+			padding: 0 20px;
+
+			#intro & {
+				width: 240px;
+			}
+		}
+
+		.fold__text {
+			text-align: center;
+			margin: 10px 0;
+		}
+
+			.btn {
+				display: block;
+				width: 100%;
+				margin: 10px auto;
+			}
+
+@media (min-width: $breakpoint-sm) {
+
+	#intro .fold__content {
+		width: 400px;
+	}
+
+}
+
+@media (min-width: $breakpoint-md) {
+
+	.fold__section {
+		float: left;
+		width: 50%;
+		height: 100vh;
+		background-color: $indexBackgroundColor;
+
+	}
+
+}

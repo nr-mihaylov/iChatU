@@ -1,0 +1,8 @@
+body {
+  position: relative;
+  font-family: "Lucida Console";
+  height: 100vh;
+  overflow: hidden; }
+
+.hidden {
+  display: none; }

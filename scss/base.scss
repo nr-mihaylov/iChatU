@@ -1,0 +1,12 @@
+@import 'util';
+
+body {
+	position: relative;
+	font-family: $consoleFont;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.hidden {
+	display: none;
+}

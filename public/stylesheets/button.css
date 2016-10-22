@@ -1,0 +1,20 @@
+.btn {
+  font: 700 1.25rem "Lucida Console"; }
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  color: #42FFCF;
+  background-color: #1D1F20;
+  font-size: 1.5rem;
+  cursor: pointer; }
+
+.btn--alternate {
+  color: #1D1F20;
+  background-color: #42FFCF; }
+
+.image-btn {
+  max-width: 48px;
+  height: auto;
+  cursor: pointer; }

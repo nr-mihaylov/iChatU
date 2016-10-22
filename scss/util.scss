@@ -1,0 +1,30 @@
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+
+$consoleFont : 'Lucida Console';
+
+%default-font	{	font:	300	1.25rem	$consoleFont;	}
+%strong-font	{	font:	700	1.25rem	$consoleFont;	}
+
+$defaultColor:			#EEEEEE;
+$successColor:			#5CFF73;
+$errorColor:			#FF5750;
+$warningColor:			#FF8143;
+$systemColor:			#42FFCF;
+
+$darkShadeColor:		#111111;
+$mediumShadeColor:		#1D1F20;
+$lightShadeColor:		#333536;
+
+$indexTextColor:		$mediumShadeColor;
+$indexBackgroundColor:	$systemColor;
+$indexErrorColor:		$errorColor;
+
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+	position: $position;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}

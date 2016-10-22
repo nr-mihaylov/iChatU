@@ -1,1 +1,107 @@
-<h1>iChatU Preview Page</h1>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>iChatU</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel='stylesheet' type="text/css" href='/stylesheets/lib/reset.min.css' />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/lib/perfect-scrollbar.min.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/lib/animate.min.css">
+		<link rel='stylesheet' type="text/css" href='/stylesheets/styles.min.css' />
+		<link rel="icon" href="/images/favicon.ico?" type="image/x-icon">
+		<script type="text/javascript" src="/javascripts/lib/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/socket.io.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/perfect-scrollbar.jquery.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/dateformat.min.js"></script>
+	</head>
+	<body>
+
+		<main class="fold">
+			<div id="intro" class="fold__section center-fixed">
+				<div class="fold__content center-fixed__element center-fixed__element--both">
+					<div class="logo">
+						<img class="logo__img" src="/images/logo.png">
+						<span class="logo__text">iChatU</span>
+					</div>
+					<p class="fold__text">An old school instant messaging service</p>
+				</div>
+			</div>
+			<div id="action" class="fold__section center-fixed">
+				<div class="fold__content center-fixed__element center-fixed__element--both">
+					<section class="switch switch--visible">
+						<div class="switch__content">
+							<p class="fold__text">What do you want to do?</p>
+							<button class="btn login">/login</button>
+							<button id="register" class="btn">/register</button>
+						</div>
+					</section>
+					<section class="switch switch--hidden">
+						<div class="switch__content">
+							<form id="login_form" class="form" action="/login" method="post">
+								<div class="form__body">
+									<p class="form__validation"></p>
+									<input class="form__field" type="text" name="username" autocomplete="off" placeholder="--username">
+									<input class="form__field" type="password" name="password" autocomplete="off" placeholder="--password">
+								</div>
+								<div class="form__actionbar">
+									<img class="image-btn form__cancel" src="/images/cancel.png">
+									<img id="login-submit" class="image-btn form__submit" src="/images/check.png">		
+								</div>
+							</form>
+						</div>
+					</section>
+					<section class="switch switch--hidden">
+						<div class="switch__content">
+							<form id="registration_form" class="form" action="/register" method="post">
+								<div class="form__body">
+									<p class="form__validation"></p>
+									<input class="form__field" type="text" name="username" autocomplete="off" placeholder="--username">
+									<input class="form__field" type="password" name="password" autocomplete="off" placeholder="--password">
+									<input class="form__field" type="text" name="alias" autocomplete="off" placeholder="--alias">
+								</div>
+								<div class="form__actionbar">
+									<img class="image-btn form__cancel" src="/images/cancel.png">
+									<img id="register-submit" class="image-btn form__submit" src="/images/check.png">
+								</div>
+							</form>
+						</div>
+					</section>
+					<section class="switch switch--hidden">
+						<div class="switch__content">
+							<p class="fold__text">Registration complete!</p>
+							<button class="btn login">/login</button>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<div class="shell">
+				<span class="shell__sample">s</span>
+				
+				<div class="statusbar hidden">
+					<div id="status_beat" class="statusbar__item statusbar__item--left">
+						<img src="/images/status.png">
+					</div>
+					<div id="info_btn" class="statusbar__item statusbar__item--default statusbar__item--right">
+						<img src="/images/info.png">
+					</div>
+
+				</div>
+				<div id="shell_output" class="shell__output">
+					<pre class="shell__output-line default"></pre>
+				</div>
+				
+				<div class="sidebar hidden">
+					<p class="sidebar__header"></p>
+					<div class="sidebar__body">
+								
+					</div>
+				</div>
+
+				<div class="shell__input hidden">
+					<div class="shell__arrow default">></div>
+					<textarea spellcheck="false" rows="1" id="shell_input" class="shell__input-line default"></textarea>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

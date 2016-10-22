@@ -1,6 +1,6 @@
 var express				= require('express');
 var router				= express.Router();
-var regHandler	= require('../registrationHandler');
+var regHandler	= require('../modules/registrationHandler');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

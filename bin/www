@@ -8,11 +8,11 @@ var app = require('../app');
 var debug = require('debug')('ichat:server');
 var http = require('http');
 var io = require('socket.io');
-var ioAuth = require('../socketioauth');
+var ioAuth = require('../modules/socketioauth');
 var mongoose = require('mongoose');
-var auth = require('../auth');
-var ichat = require('../ichat');
-var roomHandler = require('../roomHandler');
+var auth = require('../modules/auth');
+var ichat = require('../modules/ichat');
+var roomHandler = require('../modules/roomHandler');
 
 /**
  * Get port from environment and store in Express.

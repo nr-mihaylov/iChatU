@@ -48,6 +48,7 @@ gulp.task('js', function() {
 		'./client/js/ui.js', 
 		'./client/js/shell.js', 
 		'./client/js/client.js', 
+		'./client/js/interpreter.js', 
 		'./client/js/commandHandler.js', 
 		'./client/js/ichatu.js'
 	])

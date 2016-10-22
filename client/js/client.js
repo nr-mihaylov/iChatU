@@ -49,7 +49,7 @@ var SocketClient = function() {
 			if(socket && socket.connected) 
 				return socket.emit('authentication', packet);
 
-			socket = io.connect('http://188.166.160.74:3000');
+			socket = io.connect('https://188.166.160.74:3443');
 
 			this.session = socket.session = socket.session || {};
 

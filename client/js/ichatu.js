@@ -1,4 +1,4 @@
-$(window).ready(function() {
+$(window).on('load', function() {
 
 	var commandList = {
 		'create': {

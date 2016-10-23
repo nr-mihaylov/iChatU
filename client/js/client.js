@@ -45,12 +45,11 @@ var SocketClient = function() {
 			socket.emit('icp', packet, onTransmitted);
 		},
 		establishConnection: function(packet) {
-			//188.166.160.74
 
 			if(socket && socket.connected) 
 				return socket.emit('authentication', packet);
 
-			socket = io.connect('localhost:3000');
+			socket = io.connect('188.166.160.74:3000');
 
 			socket.session = socket.session || {};
 

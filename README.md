@@ -1,4 +1,4 @@
-iChatU
+# iChatU
 
 This is a very simplistic instant messaging application. It provides an user experience similar to that of using an command shell, but with a modern look & feel. The application is written in javascript, both on the frontend and the backend.
 

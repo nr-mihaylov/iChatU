@@ -20,8 +20,7 @@ module.exports = function(socket, io) {
 		for (var id in socketList.sockets) 
 			users.push(io.sockets.adapter.nsp.connected[id]);
 
-		return 
-			callback(users);
+		return callback(users);
 	}
 
 	socket.broadcastToGeneral = function(event, data) {

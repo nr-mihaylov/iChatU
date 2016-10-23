@@ -74,7 +74,6 @@ function CommandHandler(socketClient, shell, sidebar) {
 
 						var msg			=	'Welcome to ' + packet.parameters.roomName + '!';
 						var motd		=	packet.parameters.roomMotd;
-						var messageLog	=	packet.parameters.messageLog;
 
 						sc.transmitPacket(sc.createRequest('users', {}));
 
@@ -82,17 +81,6 @@ function CommandHandler(socketClient, shell, sidebar) {
 							msg = msg + ' MOTD: ' + motd;
 
 						sh.out.printHighlight(msg, sh.out.type.SYSTEM);
-
-						for (var k = messageLog.length - 1; k >= 0; k--) {
-
-							var content	=	messageLog[k].content;
-							var date	=	new Date(messageLog[k].timestamp).format("h:MM:ss TT", new Date());
-							var alias	=	messageLog[k].alias;
-
-							msg = '[' + date + ']:' + '<' + alias + '>' + ' ' + content;
-							sh.out.printLine(msg, sh.out.type.DEFAULT);
-
-						}
 
 					} else if(packet.type === 'broadcast') {
 						
@@ -176,7 +164,7 @@ function CommandHandler(socketClient, shell, sidebar) {
 								', Password: ' + roomPassword + 
 								', Message of the day: ' + roomMotd;
 
-					if(!sc.session.room) 
+					if(!sc.session.room || packet.type === 'response') 
 						sh.out.printHighlight(msg, sh.out.type.SUCCESS);
 
 					if(sb.list.listType === 0) 
@@ -218,6 +206,9 @@ function CommandHandler(socketClient, shell, sidebar) {
 
 						if(current) {
 
+							sc.session.room = null;
+							sc.transmitPacket(sc.createRequest('list', {}));
+
 							shell.out.printEmptyLine();
 							sh.out.printLine('You have been removed from room "' + name + '".', sh.out.type.WARNING);
 							shell.out.printEmptyLine();
@@ -227,7 +218,8 @@ function CommandHandler(socketClient, shell, sidebar) {
 
 						if(name === sc.session.room) {
 
-							sc.transmitPacket(sc.createRequest('list', {}));							
+							sc.session.room = null;
+							sc.transmitPacket(sc.createRequest('list', {}));
 
 							shell.out.printEmptyLine();
 							sh.out.printLine('Room "' + name + '" has been deleted.', sh.out.type.WARNING);
@@ -259,6 +251,7 @@ function CommandHandler(socketClient, shell, sidebar) {
 
 				case 'ioerror':
 
+					console.log(packet.parameters.error);
 					shell.out.printEmptyLine();
 					sh.out.printLine(packet.parameters.error, sh.out.type.ERROR);
 					shell.out.printEmptyLine();

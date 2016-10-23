@@ -45,18 +45,20 @@ var SocketClient = function() {
 			socket.emit('icp', packet, onTransmitted);
 		},
 		establishConnection: function(packet) {
+			//188.166.160.74
 
 			if(socket && socket.connected) 
 				return socket.emit('authentication', packet);
 
-			socket = io.connect('https://188.166.160.74:3443');
+			socket = io.connect('localhost:3000');
 
-			this.session = socket.session = socket.session || {};
+			socket.session = socket.session || {};
 
 
 			socket.on('connect', function() {
 				socket.emit('authentication', packet);
 				onConnectEvent.emit();
+
 			});
 
 			socket.on('authenticated', function(packet) {
@@ -68,6 +70,7 @@ var SocketClient = function() {
 			});
 
 			socket.on('disconnect', function() {
+				socket.session = {};
 				onDisconnectEvent.emit();
 			});
 
@@ -89,6 +92,7 @@ var SocketClient = function() {
 				socket.disconnect();
 
 		},
+		session: (socket && socket.session ? socket.session : {}),
 		onAuthSuccess: {
 			addListener: onAuthSuccessEvent.addListener,
 			removeListener: onAuthSuccessEvent.removeListener,

@@ -2,7 +2,6 @@ var icp = require('./icp');
 var sl = require('./ichatServer');
 var colorz = require('./colorz');
 var roomHandler = require('./roomHandler');
-var messageHandler = require('./messageHandler');
 
 function init(io, socket, data) {
 
@@ -70,14 +69,6 @@ function init(io, socket, data) {
 
 						} else {
 
-							messageHandler.newMessage(
-								content, 
-								session.room._id, 
-								session.room.name,
-								session.alias,
-								new Date().valueOf()
-							);
-
 							confirm(icp.createResponse('icp', { 'status': 200 }));
 
 							socket.broadcastToRoom(session.room.name, 'icp', icp.createBroadcast('message', { 
@@ -120,21 +111,13 @@ function init(io, socket, data) {
 						session.room.users[socket.id] = session.alias;
 						socket.join(name);
 
-						var messagelog = null;
-
-						messageHandler.getMessages(room._id, function(messages) {
-							messagelog = messages;
-
-							socket.respondToRequest('icp', icp.createResponse('join', {
-								'roomName': 	room.name,
-								'roomMotd': 	room.motd,
-								'messageLog':	messagelog
-							}));
-							socket.broadcastToRoom(room.name, 'icp', icp.createBroadcast('join', { 
-								'alias': session.alias
-							}));
-
-						});
+						socket.respondToRequest('icp', icp.createResponse('join', {
+							'roomName': 	room.name,
+							'roomMotd': 	room.motd
+						}));
+						socket.broadcastToRoom(room.name, 'icp', icp.createBroadcast('join', { 
+							'alias': session.alias
+						}));
 
 					break;
 
@@ -272,7 +255,7 @@ function init(io, socket, data) {
 
 							socket.respondToRequest('icp', icp.createResponse('delete', { 
 								'roomName': room.name,
-								'current': (room === session.room)
+								'current': (room.name === (session.room ? session.room.name : null))
 							}));
 
 							socket.broadcastToAll('icp', icp.createBroadcast('delete', { 

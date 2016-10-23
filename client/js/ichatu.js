@@ -121,7 +121,7 @@ $(window).on('load', function() {
 	});
 
 	loginForm.onSubmit.addListener(function(event) {
-		socketClient.establishConnection(socketClient.createRequest('login', event.data));
+		socketClient.establishConnection(socketClient.createRequest(null, event.data));
 	});
 
 	socketClient.onConnect.addListener(function() {
@@ -177,7 +177,10 @@ $(window).on('load', function() {
 		animateCSS('.shell__input', 'slideInUp', function() {
 
 		shell.out.printHighlight('WELCOME TO ICHATU !!!', shell.out.type.SUCCESS);
-		shell.out.printHighlight('Please note that this is, only a prototype and bugs may occur!', shell.out.type.WARNING);
+		shell.out.printHighlight(
+			'Please note that this is only a prototype and not a finished product. ' +
+			'The application does not provide any security whatsoever, beyond very basic authentication.'
+			, shell.out.type.WARNING);
 		shell.out.printHighlight('COMMAND LIST', shell.out.type.SYSTEM);
 		shell.out.printLines([
 		'/join --name (value) /* Join an existing room */',

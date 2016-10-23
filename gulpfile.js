@@ -37,8 +37,7 @@ gulp.task('sass', function() {
 			suffix: ".min",
 			extname: ".css"	
 		}))
-		.pipe(gulp.dest('./public/stylesheets/'))
-		.pipe(gulp.dest('./docs/stylesheets/'));
+		.pipe(gulp.dest('./public/stylesheets/'));
 
 });
 
@@ -59,8 +58,7 @@ gulp.task('js', function() {
 			},
 			noSource: true
 		}))
-	.pipe(gulp.dest('./public/javascripts/'))
-	.pipe(gulp.dest('./docs/javascripts/'));
+	.pipe(gulp.dest('./public/javascripts/'));
 });
 
 gulp.task('nodemon', function () {

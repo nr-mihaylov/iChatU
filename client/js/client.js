@@ -48,8 +48,7 @@ var SocketClient = function() {
 
 			if(socket && socket.connected) 
 				return socket.emit('authentication', packet);
-			// 188.166.160.74
-			socket = io.connect('localhost:3000');
+			socket = io.connect('188.166.160.74:3000');
 
 			socket.session = socket.session || {};
 

@@ -24,7 +24,6 @@ pre {
 
 	.shell__sample {
 		display: none;
-		@extend %default-font;
 	}
 
 	.shell__output {
@@ -36,7 +35,7 @@ pre {
 	}
 
 		.shell__output-line {
-			padding-bottom: 5px;
+			padding-bottom: 10px;
 			white-space: pre-wrap;
 			white-space: -moz-pre-wrap;
 			white-space: -pre-wrap;
@@ -45,8 +44,8 @@ pre {
 		}
 
 		.wat {
-			width: auto;
-			height: 550px;
+			max-width: 100%;
+			max-height: 600px;
 			padding-bottom: 10px;
 		}
 

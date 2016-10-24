@@ -41,6 +41,10 @@ $(window).on('load', function() {
 		'help': {
 			isOnline: false,
 			validArgs: []
+		},
+		'sidebar': {
+			isOnline: false,
+			validArgs: []
 		}
 	}
 
@@ -139,17 +143,10 @@ $(window).on('load', function() {
 		sidebar.list.setTitle('Unavailable');
 		sidebar.list.emptyList();
 		
-		if(socketClient.session.room) {
-			
-			shell.out.printEmptyLine();
+		if(socketClient.session.room) 
 			shell.out.printLine('You have been removed from room "' + socketClient.session.room + '".', shell.out.type.ERROR);
-			shell.out.printEmptyLine();
-
-		}
 		
-		shell.out.printEmptyLine();	
 		shell.out.printLine('CONNECTION TERMINATED', shell.out.type.ERROR);
-		shell.out.printEmptyLine();
 
 	});
 
@@ -176,21 +173,20 @@ $(window).on('load', function() {
 		$('.shell__input').show();
 		animateCSS('.shell__input', 'slideInUp', function() {
 
-		shell.out.printHighlight('WELCOME TO ICHATU !!!', shell.out.type.SUCCESS);
-		shell.out.printHighlight(
+		shell.out.printLine('WELCOME TO ICHATU !!!', shell.out.type.SUCCESS);
+		shell.out.printLine(
 			'Please note that this is only a prototype and not a finished product. ' +
 			'The application does not provide any security whatsoever, beyond very basic authentication.'
 			, shell.out.type.WARNING);
-		shell.out.printHighlight('COMMAND LIST', shell.out.type.SYSTEM);
+		shell.out.printLine('COMMAND LIST', shell.out.type.SYSTEM);
 		shell.out.printLines([
 		'/join --name (value) /* Join an existing room */',
 		'/leave /* Leave an existing room */',
 		'/motd /* Show the room\'s message of the day */',
 		'/create --name (value) ?--password (value) ?--motd (value) /* Create a new room */',
 		'/update --name (value) ?--password (value) ?--motd (value) /* Update an existing room */',
-		'/delete --name (value) /* Delete an existing room */',
+		'/delete --name (value) /* Delete an existing room */'
 		], shell.out.type.SYSTEM);
-		shell.out.printEmptyLine();
 
 		if($(window).width() > breakpointLarge) 
 			sidebar.expand('slideInRight');
@@ -239,9 +235,7 @@ $(window).on('load', function() {
 			});
 
 		}, function(error) {
-			shell.out.printEmptyLine();
 			shell.out.printLine(error, shell.out.type.ERROR);
-			shell.out.printEmptyLine();
 		});
 
 	});

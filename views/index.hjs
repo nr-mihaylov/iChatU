@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="/javascripts/lib/perfect-scrollbar.jquery.min.js"></script>
 		<script type="text/javascript" src="/javascripts/lib/dateformat.min.js"></script>
 		<script type="text/javascript" src="/javascripts/script.min.js"></script>
+
 	</head>
 	<body>
 
@@ -75,7 +76,7 @@
 			</div>
 
 			<div class="shell">
-				<span class="shell__sample">s</span>
+				<img class="shell__sample" src="/images/wat.png" />
 				
 				<div class="statusbar hidden">
 					<div id="status_beat" class="statusbar__item statusbar__item--left">

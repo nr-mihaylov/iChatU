@@ -1,10 +1,11 @@
 function Shell(inputSelector, outputSelector) {
 
 	var input = $(inputSelector);
+	var output = $(outputSelector);
 	var inputVault = new InputVault(100);
 	var onSubmitEvent = new CustEvent();
 
-	$(outputSelector).perfectScrollbar({
+	output.perfectScrollbar({
 		wheelSpeed: 1,
 		suppressScrollX: true
 	}); 
@@ -69,41 +70,11 @@ function Shell(inputSelector, outputSelector) {
 
 	});
 
-	return {
-		in: {
-			onSubmit: onSubmitEvent.addListener,
-			unbindSubmit: onSubmitEvent.removeListener,
-			unbindAllSubmit: onSubmitEvent.removeAllListeners
-		},
-		out: ( new TextFormatter(outputSelector) )
-	}
-}
-
-var TextFormatter = function(selec, opts) {
-
-	opts = opts || {};
-
-	const SYMBOL_TOP_BORDER		=	opts.SYMBOL_TOP_BORDER || '=';
-	const SYMBOL_SIDE_BORDER	=	opts.SYMBOL_SIDE_BORDER || '|';
-	const PADDING_TOP			=	opts.PADDING_TOP || 1;
-	const PADDING_SIDE			=	opts.PADDING_SIDE || 1;
-	const SAMPLE_SELECTOR		=	opts.SAMPLE_SELECTOR || '.shell__sample';
-
-	var sampleW					=	$(SAMPLE_SELECTOR).width();
-	var sampleH					=	$(SAMPLE_SELECTOR).height();
-	var container				=	$(selec);
-	var containerWidth			=	container.height() < container.width() 
-										? container.height() 
-										: container.width();
-
-	var lineMaxSymbols			=	Math.floor(containerWidth/sampleW);
-	var contentMaxSymbols		=	lineMaxSymbols - 2 * (SYMBOL_SIDE_BORDER.length + PADDING_SIDE);
-
 	function generateRaw(content) {
 
 		var item = $('<div></div>')
 			.html(content)
-			.appendTo(container);
+			.appendTo(output);
 
 		animateCSS(item, 'fadeIn');
 
@@ -119,117 +90,66 @@ var TextFormatter = function(selec, opts) {
 				
 			)
 		.css('color', type)
-		.appendTo(container);
+		.appendTo(output);
 
 		animateCSS(item, 'fadeIn');
-
-	}
-
-	function generateUniform(symbol, length, type) {
-
-		var item = $('<div><pre>'+ Array(length + 1).join(symbol) + '</pre></div>')
-		.css('color', type)
-		.appendTo(container);
-
-		animateCSS(item, 'fadeIn');
-
-	}
-
-	function generateEmptyRow(length, type) {
-
-		var item = $(
-			'<div><pre>' + 
-			SYMBOL_SIDE_BORDER + 
-			Array(PADDING_SIDE + 1).join(' ') + 
-			Array(length - ( (PADDING_SIDE * 2) + 1) ).join(' ') + 
-			Array(PADDING_SIDE + 1).join(' ') + 
-			SYMBOL_SIDE_BORDER + 
-			'</pre></div>'
-		)
-		.css('color', type)
-		.appendTo(container);
-
-		animateCSS(item, 'fadeIn');
-
-	}
-
-	function generateRow(content, type) {
-
-		var whiteSpace = contentMaxSymbols - content.length;
-
-		var item = $(
-			'<div><pre>' + 
-			SYMBOL_SIDE_BORDER + 
-			Array(PADDING_SIDE + 1).join(' ') + 
-			content + 
-			Array(PADDING_SIDE + whiteSpace + 1).join(' ') + 
-			SYMBOL_SIDE_BORDER + 
-			'</pre></div>'
-		)
-		.css('color', type)
-		.appendTo(container);
-
-		animateCSS(item, 'fadeIn');
-
-	}
-
-	function generateContent(content, type) {
-
-		if(content.length > contentMaxSymbols) {
-
-			var current = content.slice(0, contentMaxSymbols),
-			next = content.slice(contentMaxSymbols, contentMaxSymbols.length);
-
-			generateRow(current, type);
-			generateContent(next, type);
-
-		} else {
-			generateRow(content, type);
-		}
 
 	}
 
 	function scroll() {
-		container.scrollTop(container.prop('scrollHeight'));
-		container.perfectScrollbar('update');
+		output.scrollTop(output.prop('scrollHeight'));
+		output.perfectScrollbar('update');
 	}
 
 	return {
+		in: {
+			onSubmit: onSubmitEvent.addListener,
+			unbindSubmit: onSubmitEvent.removeListener,
+			unbindAllSubmit: onSubmitEvent.removeAllListeners
+		},
+		out: {
+			printRaw: function(content) {
+				generateRaw(content);
+				scroll();
+			},
+			printLine: function(content, type) {
 
-		printRaw: function(content, type) {
-			generateRaw(content, type);
-			scroll();
-		},
-		printLine: function(content, type) {
-			generateLine(content, type);
-			scroll();
-		},
-		printLines: function(content, type) {
-			for(var i = 0; i<content.length; i++)
-				generateLine(content[i], type);
+				switch(type) {
 
-			scroll();
-		},
-		printEmptyLine: function() {
-			generateUniform(' ', lineMaxSymbols);
-			scroll();
-		},
-		printHighlight: function(content, type) {
-			generateUniform(' ', lineMaxSymbols, type);
-			generateUniform(SYMBOL_TOP_BORDER, lineMaxSymbols, type);
-			generateEmptyRow(lineMaxSymbols, type);
-			generateContent(content, type);
-			generateEmptyRow(lineMaxSymbols, type);
-			generateUniform(SYMBOL_TOP_BORDER, lineMaxSymbols, type);
-			generateUniform(' ', lineMaxSymbols, type);
-			scroll();
-		},		
-		type: {
-			DEFAULT:	'#EEEEEE',
-			SUCCESS:	'#5CFF73',
-			WARNING:	'#FF8143',
-			ERROR:		'#FF5750',
-			SYSTEM:		'#42FFCF'
+					case this.type.SYSTEM:
+						content = '[INFO]: ' + content;
+					break;
+
+					case this.type.SUCCESS:
+						content = '[SUCCESS]: ' + content;
+					break;
+
+					case this.type.WARNING:
+						content = '[WARNING]: ' + content;
+					break;
+
+					case this.type.ERROR:
+						content = '[ERROR]: ' + content;
+					break;
+
+				}
+
+				generateLine(content, type);
+				scroll();
+			},
+			printLines: function(content, type) {
+				for(var i = 0; i<content.length; i++)
+					generateLine(content[i], type);
+
+				scroll();
+			},
+			type: {
+				DEFAULT:	'#EEEEEE',
+				SUCCESS:	'#5CFF73',
+				WARNING:	'#FF8143',
+				ERROR:		'#FF5750',
+				SYSTEM:		'#42FFCF'
+			}
 		}
 	}
 }

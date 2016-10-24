@@ -10,7 +10,7 @@ function CommandHandler(socketClient, shell, sidebar) {
 
 			case 'help':
 
-				sh.out.printHighlight('Command list', sh.out.type.SYSTEM);
+				shell.out.printLine('COMMAND LIST', shell.out.type.SYSTEM);
 				sh.out.printLines([
 				'/join --name (value) /* Join an existing room */',
 				'/leave /* Leave an existing room */',
@@ -22,21 +22,17 @@ function CommandHandler(socketClient, shell, sidebar) {
 
 			break;
 
+			case 'sidebar': 
+
+				sb.toggle('slideInRight', 'slideOutRight');
+
+			break;
+
 			default: 
-				if(packet.type === 'message') {
-
-					shell.out.printEmptyLine();
+				if(packet.type === 'message') 
 					sh.out.printLine('You cannot send messages, while offline.', sh.out.type.ERROR);
-					shell.out.printEmptyLine();
-
-				}
-				else {
-
-					shell.out.printEmptyLine();
+				else 
 					sh.out.printLine('This command is not available, while offline.', sh.out.type.ERROR);
-					shell.out.printEmptyLine();
-
-				}
 
 		}
 
@@ -80,13 +76,11 @@ function CommandHandler(socketClient, shell, sidebar) {
 						if(motd)
 							msg = msg + ' MOTD: ' + motd;
 
-						sh.out.printHighlight(msg, sh.out.type.SYSTEM);
+						sh.out.printLine(msg, sh.out.type.SYSTEM);
 
 					} else if(packet.type === 'broadcast') {
 						
-						shell.out.printEmptyLine();
 						sh.out.printLine(packet.parameters.alias + ' has joined the room.', sh.out.type.SYSTEM);
-						shell.out.printEmptyLine();
 
 						if(sb.list.listType === 1) 
 							sb.list.addItemToList(packet.parameters.alias);
@@ -100,9 +94,7 @@ function CommandHandler(socketClient, shell, sidebar) {
 					if(packet.type === 'response') {
 
 						sc.session.room = null;
-						shell.out.printEmptyLine();
 						sh.out.printLine('You have left room "' + packet.parameters.roomName + '".', sh.out.type.SYSTEM);
-						shell.out.printEmptyLine();
 
 						sc.transmitPacket(sc.createRequest('list', {}));
 
@@ -165,7 +157,7 @@ function CommandHandler(socketClient, shell, sidebar) {
 								', Message of the day: ' + roomMotd;
 
 					if(!sc.session.room || packet.type === 'response') 
-						sh.out.printHighlight(msg, sh.out.type.SUCCESS);
+						sh.out.printLine(msg, sh.out.type.SUCCESS);
 
 					if(sb.list.listType === 0) 
 						sb.list.addItemToList(roomName);
@@ -187,9 +179,9 @@ function CommandHandler(socketClient, shell, sidebar) {
 								', Message of the day: ' + roomMotd;
 
 					if(packet.type === 'response') 
-						sh.out.printHighlight('Room ' + roomName + ' updated! ' + msg, sh.out.type.SUCCESS);
+						sh.out.printLine('Room ' + roomName + ' updated! ' + msg, sh.out.type.SUCCESS);
 					else if(packet.type === 'broadcast')
-						sh.out.printHighlight('Room updated! ' + msg, sh.out.type.SYSTEM);
+						sh.out.printLine('Room updated! ' + msg, sh.out.type.SYSTEM);
 
 				break;
 
@@ -200,18 +192,14 @@ function CommandHandler(socketClient, shell, sidebar) {
 
 					if(packet.type === 'response') {
 
-						shell.out.printEmptyLine();
 						sh.out.printLine('Room "' + name + '" has been deleted.', sh.out.type.SUCCESS);
-						shell.out.printEmptyLine();
 
 						if(current) {
 
 							sc.session.room = null;
 							sc.transmitPacket(sc.createRequest('list', {}));
 
-							shell.out.printEmptyLine();
 							sh.out.printLine('You have been removed from room "' + name + '".', sh.out.type.WARNING);
-							shell.out.printEmptyLine();
 						}
 
 					} else if(packet.type === 'broadcast') {
@@ -221,11 +209,8 @@ function CommandHandler(socketClient, shell, sidebar) {
 							sc.session.room = null;
 							sc.transmitPacket(sc.createRequest('list', {}));
 
-							shell.out.printEmptyLine();
 							sh.out.printLine('Room "' + name + '" has been deleted.', sh.out.type.WARNING);
-							shell.out.printEmptyLine();
-							sh.out.printLine('You have been removed from room "' + name + '".', sh.out.type.WARNING);	
-							shell.out.printEmptyLine();
+							sh.out.printLine('You have been removed from room "' + name + '".', sh.out.type.WARNING);
 						}
 
 					}
@@ -240,21 +225,16 @@ function CommandHandler(socketClient, shell, sidebar) {
 					var motd = packet.parameters.roomMotd;
 
 					if(motd)
-						sh.out.printHighlight('MOTD: ' + motd, sh.out.type.SYSTEM);
+						sh.out.printLine('MOTD: ' + motd, sh.out.type.SYSTEM);
 					else {
-						shell.out.printEmptyLine();
 						sh.out.printLine('MOTD unavailable.', sh.out.type.WARNING);
-						shell.out.printEmptyLine();
 					}
 
 				break;
 
 				case 'ioerror':
 
-					console.log(packet.parameters.error);
-					shell.out.printEmptyLine();
 					sh.out.printLine(packet.parameters.error, sh.out.type.ERROR);
-					shell.out.printEmptyLine();
 
 				break;
 
